@@ -18,6 +18,13 @@ describe Employee do
     employee1 = Employee.create({:name => "Jon Snow"})
     project1 = Project.create({:name => "Find Igrit", :employee_id => employee1.id, :current => false})
     project2 = Project.create({:name => "Protect the North", :employee_id => employee1.id, :current => true})
-    expect(employee1.current).to eq project2
+    expect(employee1.current_project).to eq project2
+  end
+
+  it 'returns a list of completed projects for a single employee' do
+    employee1 = Employee.create({:name => "Jon Snow"})
+    project1 = Project.create({:name => "Find Igrit", :employee_id => employee1.id, :current => false})
+    project2 = Project.create({:name => "Protect the North", :employee_id => employee1.id, :current => false})
+    expect(employee1.completed_projects).to eq [project1, project]
   end
 end
