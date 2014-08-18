@@ -1,5 +1,3 @@
 class Division < ActiveRecord::Base
-  # def method_name
-
-  # end
+  has_many :employees
 end

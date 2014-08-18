@@ -5,6 +5,6 @@ describe Division do
     division1 = Division.create({:name => "Accounting"})
     employee1 = Employee.create({:name => "John Snow", :division_id => division1.id})
     employee2 = Employee.create({:name => "Sam Tarly", :division_id => division1.id})
-    expect(division1.employee).to eq [employee1, employee2]
+    expect(division1.employees).to eq [employee1, employee2]
   end
 end
