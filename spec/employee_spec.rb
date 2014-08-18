@@ -7,13 +7,6 @@ describe Employee do
     expect(employee1.division).to eq division1
   end
 
-  it "returns the employee's project" do
-    employee1 = Employee.create({:name => "John Snow"})
-    project1 = Project.create({:name => "Protect the North", :employee_id => employee1.id})
-    project2 = Project.create({:name => "Watch the Wall", :employee_id => employee1.id})
-    expect(employee1.projects).to eq [project1, project2]
-  end
-
   it "returns the current project the employee is working" do
     employee1 = Employee.create({:name => "Jon Snow"})
     project1 = Project.create({:name => "Find Igrit", :employee_id => employee1.id, :current => false})
@@ -21,10 +14,12 @@ describe Employee do
     expect(employee1.current_project).to eq project2
   end
 
-  it 'returns a list of completed projects for a single employee' do
+  it 'returns the list of all projects(regardless of status) for a single employee' do
     employee1 = Employee.create({:name => "Jon Snow"})
-    project1 = Project.create({:name => "Find Igrit", :employee_id => employee1.id, :current => false})
-    project2 = Project.create({:name => "Protect the North", :employee_id => employee1.id, :current => false})
-    expect(employee1.completed_projects).to eq [project1, project]
+    project1 = Project.create({:name => "Find Igrit", :current => false})
+    project2 = Project.create({:name => "Protect the North", :current => false})
+    employee1.projects << project1
+    employee1.projects << project2
+    expect(employee1.projects).to eq [project1, project2]
   end
 end
