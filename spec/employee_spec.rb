@@ -9,8 +9,8 @@ describe Employee do
 
   it "returns the current project the employee is working" do
     employee1 = Employee.create({:name => "Jon Snow"})
-    project1 = Project.create({:name => "Find Igrit", :employee_id => employee1.id, :current => false})
-    project2 = Project.create({:name => "Protect the North", :employee_id => employee1.id, :current => true})
+    project1 = Project.create({:name => "Find Igrit", :current => false})
+    project2 = Project.create({:name => "Protect the North", :current => true})
     expect(employee1.current_project).to eq project2
   end
 
