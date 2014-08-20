@@ -35,4 +35,19 @@ describe Employee do
     expect(employee1.contributions).to eq [contribution1, contribution3]
   end
 
+  it "lists the project an employee has worked on between two dates" do
+    employee1 = Employee.create({:name => "Jon Snow"})
+    contribution1 = Contribution.create({:employee_id => employee1.id, :description => "Looked for Igrit beyond the wall"})
+    contribution2 = Contribution.create({:employee_id => employee1.id, :description => "Kept Sam alive"})
+    contribution3 = Contribution.create({:employee_id => employee1.id, :description => "Warned the men of the watch"})
+    project1 = Project.create({:name => "Find Igrit", :start_date => '2014-04-28', :end_date => '2014-08-08'})
+    project2 = Project.create({:name => "Protect the North", :start_date => '2013-12-28', :end_date => '2014-03-25'})
+    project3 = Project.create({:name => "Revenge families murder", :start_date => '2014-06-07', :end_date => '2014-12-17'})
+    employee1.projects << project1
+    employee1.projects << project2
+    employee1.projects << project3
+    beginning = '2014-07-07'
+    ending = '2014-11-07'
+    expect(employee1.projects_during(beginning, ending)).to eq [project1, project3]
+  end
 end
